@@ -1,22 +1,24 @@
 // app.js
 const express = require("express");
 const path = require("node:path");
+const indexRouter = require("./routes/indexRouter");
+const messagesRouter = require("./routes/messagesRouter");
 
+// app setup
 const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-
 const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
 
-const links = [
-  { href: "/", text: "Home" },
-  { href: "about", text: "About" },
-];
+// middleware
+app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.render("index", { links: links});
-});
+// Routers
+app.use("/", indexRouter);
+app.use("/messages", messagesRouter);
+
+
 
 const PORT = 3000;
 app.listen(PORT, (error) => {

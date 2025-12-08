@@ -1,0 +1,21 @@
+<!-- form.ejs -->
+<html>
+  <head>
+     <link rel="stylesheet" href="/styles.css">
+    <title>Homepage</title>
+  </head>
+  <body>
+    <div class="title"><%= title %></div>
+    <form method="POST" action="/new">
+        <div class="inputContainer">
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="messageUser">
+        </div>
+        <div class="inputContainer">
+            <label for="message">Message:</label>
+            <input type="text" id="message" name="messageText">
+        </div>
+        <button type="submit">Submit!</button>
+    </form>
+  </body>
+</html>
