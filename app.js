@@ -20,10 +20,7 @@ app.use("/messages", messagesRouter);
 
 
 
-const PORT = 3000;
-app.listen(PORT, (error) => {
-  if (error) {
-    throw error;
-  }
-  console.log(`My first Express app - listening on port ${PORT}!`);
-});
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+  console.log(`App is listening on port ${port}`)
+})
