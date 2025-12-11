@@ -1,23 +1,27 @@
 // controllers/authorController.js
 
-const messages = require("../models/messages");
+const db = require("../db/queries");
 const CustomNotFoundError = require("../errors/CustomNotFoundError");
 
-const getIndex = (req, res) => {
+const getIndex = async (req, res) => {
+  const messages = await db.getAllMessages();
+  console.log(messages)
   res.render("index", { title: "Mini Messageboard", messages: messages });
 };
 
-const getNew = (req, res) => {
+const getNew = async (req, res) => {
+  const messages = await db.getAllMessages();
+  console.log(messages)
   res.render("form", { title: "New Message", messages: messages });
 };
 
-const createNew = (req, res) => {
+const createNew = async (req, res) => {
   const newMsg = {
   text: req.body.messageText,
-  user: req.body.user,
+  user: req.body.messageUser,
   added: new Date()
 };
-  messages.push(newMsg);
+  await db.insertMessage(newMsg)
   res.redirect("/");
 };
 

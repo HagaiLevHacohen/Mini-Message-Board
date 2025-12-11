@@ -1,10 +1,12 @@
 // controllers/authorController.js
 
-const messages = require("../models/messages");
+const db = require("../db/queries");
 const CustomNotFoundError = require("../errors/CustomNotFoundError");
 
-const getMessage = (req, res) => {
-  res.render("message", {message: messages[req.params.messageID] });
+const getMessage = async (req, res) => {
+  const message = await db.getMessage(req.params.messageID);
+  console.log(message)
+  res.render("message", {message: message});
 };
 
 
